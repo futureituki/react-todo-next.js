@@ -15,7 +15,7 @@ import { DoneList } from "../components/DoneList";
 import { Tab } from "../components/Tabs";
 
 const Dashboard:NextPage = () => {
-  console.log(process.env.ALGOLIA_ADMIN_API_KEY )
+  console.log(`${process.env.ALGOLIA_ADMIN_API_KEY}` )
   const router = useRouter()
   const queryClient = useQueryClient()
   const { data:tasks, status} = useQueryTasks()
