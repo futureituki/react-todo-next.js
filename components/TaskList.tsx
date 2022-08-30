@@ -33,7 +33,7 @@ export const TaskList = () => {
         align="center"
         mb={20}
         >      
-          Today's TODO
+          Today TODO
         </Text>
       {todayTask?.map((task) => (
         <Group key={task.id}>
