@@ -36,7 +36,7 @@ export const TaskList = () => {
           Today's TODO
         </Text>
       {todayTask?.map((task) => (
-        <Group>
+        <Group key={task.id}>
           <StarIcon
           className="h-5 w-5 cursor-pointer text-white-500 hover:text-blue-500"
           onClick={() => handleChangeTodo(task)}

@@ -22,7 +22,7 @@ export const DoneList = () => {
           Done Todo
         </Text>
       {doneTask?.map((task) => (
-        <Group>
+        <Group key={task.id}>
           <IconArrowBack 
             className="h-5 w-5 cursor-pointer text-blue-500"
             onClick={() => handleChangeTodo(task)}
