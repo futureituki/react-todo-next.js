@@ -19,9 +19,7 @@ const SearchTodo = () => {
     const algoliaIndex = client.initIndex("Todo");
     await algoliaIndex.saveObjects(taskList as any);
   }
-  useEffect(() => {
-    Alglia()
-  },[])
+  Alglia()
   return (
     <Layout title='todo search'>
       <Text
