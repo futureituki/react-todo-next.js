@@ -18,25 +18,19 @@ export const Search: React.FC = () => {
     const result = tasks?.filter((task) => {
       return task.title.toLowerCase().match(e.target.value.toLowerCase());
     });
-    console.log(result);
     setShowItems(result);
   };
-  const SelectOrder = () => {
-    if(ref.current?.value === 'NewOrder') {
-      const neworderItem = showItems?.sort(function(a, b){
-        return (a.createdAt > b.createdAt ? -1 : 1);
-      });
-      console.log(neworderItem)
-      setOrderSortItems([])
-    } 
-    if(ref.current?.value === 'LatestOrder') {
-      const latestorderItem = showItems?.sort(function(a, b){
-        return (a.createdAt > b.createdAt ? 1 : -1);
-      });
-      console.log(latestorderItem)
-      setOrderSortItems(latestorderItem)
-    } 
-  }
+  // const SelectOrder = () => {
+  //   if(ref.current?.value === 'NewOrder') {
+  //     setOrderSortItems([])
+  //   } 
+  //   if(ref.current?.value === 'LatestOrder') {
+  //     const latestorderItem = showItems?.sort(function(a, b){
+  //       return (a.createdAt > b.createdAt ? 1 : -1);
+  //     });
+  //     setOrderSortItems(latestorderItem)
+  //   } 
+  // }
   return (
     <div>
       <form action='' className='flex justify-center'>
@@ -56,7 +50,7 @@ export const Search: React.FC = () => {
         <NativeSelect 
             ref={ref} 
             data={[{ value: 'NewOrder', label: '新しい順' }, { value: 'LatestOrder', label: '古い順' }]}
-            onChange={SelectOrder}
+            // onChange={SelectOrder}
             />
       <div className='mt-6'>
         {
