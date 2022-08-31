@@ -1,5 +1,5 @@
 import { FormEvent } from "react"
-import { TextInput, Button, Center } from "@mantine/core"
+import { TextInput, Button, Center, Textarea } from "@mantine/core"
 import { IconDatabase } from "@tabler/icons"
 import useStore from "../store"
 import { useMutateTask } from "../hooks/useMutateTask"
@@ -26,7 +26,7 @@ export const TaskUpdateForm = () => {
           value={editedTask.title || ''}
           onChange = {(e) => update({...editedTask, title:e.target.value})}
         />
-        <TextInput
+        <Textarea
           mt="md"
           placeholder="description"
           value={editedTask.description || ''}

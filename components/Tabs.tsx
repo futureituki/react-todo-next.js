@@ -1,8 +1,9 @@
 import React from 'react'
-import { Tabs } from '@mantine/core';
+import { Group, Tabs } from '@mantine/core';
 import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons';
 import { TaskList } from './TaskList';
 import { DoneList } from './DoneList';
+import { ToggleColor } from './ToggleColor';
 
 export const Tab = () => {
   return (
@@ -23,6 +24,10 @@ export const Tab = () => {
 
     <Tabs.Panel value="settings" pt="xs">
       Settings tab content
+      <Group>
+        <ToggleColor/>
+        <p>dark or light</p>
+      </Group>
     </Tabs.Panel>
   </Tabs>  )
 }

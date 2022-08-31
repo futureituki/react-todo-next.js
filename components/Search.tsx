@@ -1,64 +1,91 @@
-import React from 'react'
-import client from '../client/algolia';
-import { useQueryTasks } from '../hooks/useQueryTasks'
-import algoliasearch from 'algoliasearch/lite'
-import { InstantSearch, SearchBox, Hits, HitsProps, Configure, Pagination } from 'react-instantsearch-dom';
-import { SearchIcon } from '@heroicons/react/solid';
-import { debounce } from 'debounce'
-import { Task } from '@prisma/client';
-import Link from 'next/link';
-import 'instantsearch.css/themes/satellite-min.css';
+import { SearchIcon } from "@heroicons/react/solid";
+import { Group, Input, Loader, NativeSelect } from "@mantine/core";
+import { Task } from "@prisma/client";
+import Link from "next/link";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useQueryTasks } from "../hooks/useQueryTasks";
 
-type Props = {
-  objectID:string,
-  title:string,
-  description:string
-}
-
-const Hit:HitsProps<Props>['hitComponent'] = ({hit}:{hit:Props}) => {
-  console.log(hit)
-  return ( 
-    <>
-  <div className='rounded-md shadow p-4'>
-      <h2 className='line-clamp-2'>
-        <Link href={`todo/${hit.objectID}`}>
-          <a>{hit.title}</a>
-        </Link>
-        <p>{hit.description}</p>
-        </h2>
+export const Search: React.FC = () => {
+  const { data:tasks, status } = useQueryTasks()
+  const ref = useRef<HTMLSelectElement>(null)
+  if(status === 'loading') return <Loader/>
+  const [showItems, setShowItems] = useState<Task[] | undefined>([]);
+  const [orderSortItems, setOrderSortItems] = useState<Task[] | undefined>([])
+  useEffect(() => {
+    setShowItems(tasks);
+  }, []);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const result = tasks?.filter((task) => {
+      return task.title.toLowerCase().match(e.target.value.toLowerCase());
+    });
+    console.log(result);
+    setShowItems(result);
+  };
+  const SelectOrder = () => {
+    if(ref.current?.value === 'NewOrder') {
+      const neworderItem = showItems?.sort(function(a, b){
+        return (a.createdAt > b.createdAt ? -1 : 1);
+      });
+      console.log(neworderItem)
+      setOrderSortItems([])
+    } 
+    if(ref.current?.value === 'LatestOrder') {
+      const latestorderItem = showItems?.sort(function(a, b){
+        return (a.createdAt > b.createdAt ? 1 : -1);
+      });
+      console.log(latestorderItem)
+      setOrderSortItems(latestorderItem)
+    } 
+  }
+  return (
+    <div>
+      <form action='' className='flex justify-center'>
+        <Group>
+          <SearchIcon
+            width={35}
+            height={25}
+            className="text-inherit absolute"/>
+          <Input
+            type='text'
+            icon={<SearchIcon width={20}/>}
+            className='my-8 rounded border border-black'
+            onChange={(e:ChangeEvent<HTMLInputElement>) => handleChange(e)}
+          />
+        </Group>
+      </form>
+        <NativeSelect 
+            ref={ref} 
+            data={[{ value: 'NewOrder', label: '新しい順' }, { value: 'LatestOrder', label: '古い順' }]}
+            onChange={SelectOrder}
+            />
+      <div className='mt-6'>
+        {
+          orderSortItems == [] ? orderSortItems?.map((item, i) => {
+            return (
+              <Link 
+                key={item.id} 
+                href={`todo/${item.id}`}
+                >
+                <a 
+                  className="block no-underline text-inherit hover:underline pb-2 pt-2">
+                  {item.title}
+                </a>
+              </Link>
+            );
+          }) : showItems?.map((item) => {
+          return (
+            <Link 
+              key={item.id} 
+              href={`todo/${item.id}`}
+              >
+              <a 
+                className="block no-underline text-inherit hover:underline pb-2 pt-2">
+                {item.title}
+              </a>
+            </Link>
+          );
+        })}
+      </div>
     </div>
-    </>
-  )
-}
-
-export const Search = () => {
-//   const { data: tasks, status } = useQueryTasks();
-//   const taskList = tasks?.map(task => ({
-//     objectID:task.id, 
-//     title:task.description,
-//     start:String(task.createdAt).slice(0,10)
-// }))
-//   const algoliaIndex = client.initIndex("Todo");
-//   const algoliaRecord= [
-//     tasks?.map((task) => {
-//       {
-//         objectID: todo.id,
-//         title: todo.title,
-//         content: todo.description,
-//       }
-//     })
-// ];
-
-// const res = await algoliaIndex.saveObjects(algoliaRecord);
-return (
-  <div>
-        <InstantSearch indexName="Todo" searchClient={client}>
-        <SearchBox />
-        <Configure hitsPerPage={2}/>
-        <Hits<Props>  
-        hitComponent={Hit}/>      
-        <Pagination/>
-        </InstantSearch>
-  </div>
-);
-}
+  );
+};

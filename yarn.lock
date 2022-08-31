@@ -879,13 +879,6 @@
     "@types/use-sync-external-store" "^0.0.3"
     use-sync-external-store "^1.2.0"
 
-"@types/algoliasearch@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@types/algoliasearch/-/algoliasearch-4.0.0.tgz#129501dff14b70024439751beb3ec820417f566a"
-  integrity sha512-XMGE0h/dRV7qR6lR/zgGL01esc39pLHNl4m7gKZldrgoov/IaFJGfmmEJGxktlH63esWEtAiXzbjLfvEQXN15Q==
-  dependencies:
-    algoliasearch "*"
-
 "@types/debounce@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@types/debounce/-/debounce-1.2.1.tgz#79b65710bc8b6d44094d286aecf38e44f9627852"
@@ -1059,7 +1052,7 @@ algoliasearch-helper@>=3, algoliasearch-helper@^3.10.0:
   dependencies:
     "@algolia/events" "^4.0.1"
 
-algoliasearch@*, algoliasearch@>=4, algoliasearch@^4.14.2:
+algoliasearch@>=4:
   version "4.14.2"
   resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-4.14.2.tgz#63f142583bfc3a9bd3cd4a1b098bf6fe58e56f6c"
   integrity sha512-ngbEQonGEmf8dyEh5f+uOIihv4176dgbuOZspiuhmTTBRBuzWu3KCGHre6uHj5YyuC7pNvQGzB6ZNJyZi0z+Sg==
@@ -2229,11 +2222,6 @@ inline-style-parser@0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/inline-style-parser/-/inline-style-parser-0.1.1.tgz#ec8a3b429274e9c0a1f1c4ffa9453a7fef72cea1"
   integrity sha512-7NXolsK4CAS5+xvdj5OMMbI962hU/wvwoxk+LWR9Ek9bVtyuuYScDN6eS0rUm6TxApFpw7CX1o4uJzcd4AyD3Q==
-
-instantsearch.css@^7.4.5:
-  version "7.4.5"
-  resolved "https://registry.yarnpkg.com/instantsearch.css/-/instantsearch.css-7.4.5.tgz#2a521aa634329bf1680f79adf87c79d67669ec8d"
-  integrity sha512-iIGBYjCokU93DDB8kbeztKtlu4qVEyTg1xvS6iSO1YvqRwkIZgf0tmsl/GytsLdZhuw8j4wEaeYsCzNbeJ/zEQ==
 
 internal-slot@^1.0.3:
   version "1.0.3"

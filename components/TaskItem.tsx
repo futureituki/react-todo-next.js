@@ -15,7 +15,7 @@ export const TaskItem:FC<Omit<Task, 'createdAt' | 'updatedAt' | 'userId' | 'done
         <TaskButton id={id} description={description} title={title}/>
       </div>
       <Link href={`todo/${id}`}>
-        <a className="text-white no-underline hover:underline ">
+        <a className="text-inherit no-underline hover:underline ">
           {title}
         </a>
       </Link>

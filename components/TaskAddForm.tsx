@@ -3,7 +3,6 @@ import { TextInput, Button, Center, Textarea } from "@mantine/core"
 import { IconDatabase } from "@tabler/icons"
 import { useMutateTask } from "../hooks/useMutateTask"
 import { useRouter } from "next/router"
-import client from "../client/algolia"
 import { Task } from "@prisma/client"
 import { useQueryTasks } from "../hooks/useQueryTasks"
 

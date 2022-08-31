@@ -1,7 +1,7 @@
 import '../styles/globals.css'
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app'
-import { MantineProvider } from '@mantine/core';
+import { ColorScheme, ColorSchemeProvider, MantineProvider, useMantineColorScheme } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';  
 import axios from 'axios';
@@ -16,6 +16,9 @@ const queryClient = new QueryClient({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
   axios.defaults.withCredentials = true
   useEffect(() => {
     const getCsrfToken = async() => {
@@ -28,17 +31,18 @@ function MyApp({ Component, pageProps }: AppProps) {
   },[])
   return (
       <QueryClientProvider client={queryClient}>
-        <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: 'dark',
-          fontFamily: 'Verdana, sans-serif'
-        }}
-      >
-        <Component {...pageProps} />
-      </MantineProvider>
+        <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+          <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{            
+            colorScheme,
+            fontFamily: 'Verdana, sans-serif'
+          }}
+        >
+          <Component {...pageProps} />
+        </MantineProvider>
+        </ColorSchemeProvider>
       <ReactQueryDevtools/>
     </QueryClientProvider>
   )

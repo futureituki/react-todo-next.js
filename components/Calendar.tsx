@@ -3,10 +3,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import jaLocale from '@fullcalendar/core/locales/ja';
 import '@fullcalendar/common/main.css'
 import '@fullcalendar/daygrid/main.css'
-import { useQueryTask, useQueryTasks } from '../hooks/useQueryTasks';
-import { format } from 'date-fns';
+import { useQueryTasks } from '../hooks/useQueryTasks';
 import { useState } from 'react';
-import { Modal, Button, Group, Text, Box, Loader } from '@mantine/core';
+import { Modal, Text, Loader } from '@mantine/core';
 
 export const Calendar = () => {
   const { data: tasks, status } = useQueryTasks()

@@ -20,7 +20,7 @@ export const Nav = () => {
         <Group spacing="lg">
           {links.map((link:Prop) => (
             <Link href={link.url} key={link.name}>
-              <a className='no-underline text-white text-lg hover:underline'>{link.name}</a>
+              <a className='no-underline text-inherit text-lg hover:underline'>{link.name}</a>
             </Link>
           ))}
         </Group>
