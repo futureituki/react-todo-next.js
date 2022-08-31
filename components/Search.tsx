@@ -13,12 +13,12 @@ export const Search: React.FC = () => {
   const [showItems, setShowItems] = useState<Task[] | undefined>([]);
   const [orderSortItems, setOrderSortItems] = useState<Task[] | undefined>(tasks)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const result = tasks?.filter((task) => {
-      return task.title.toLowerCase().match(e.target.value.toLowerCase());
-    });
-    setShowItems(result);
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const result = tasks?.filter((task) => {
+  //     return task.title.toLowerCase().match(e.target.value.toLowerCase());
+  //   });
+  //   setShowItems(result);
+  // };
   const SelectOrder = () => {
     if(ref.current?.value === 'NewOrder') {
       setOrderSortItems([])
@@ -42,14 +42,14 @@ export const Search: React.FC = () => {
             type='text'
             icon={<SearchIcon width={20}/>}
             className='my-8 rounded border border-black'
-            onChange={(e:ChangeEvent<HTMLInputElement>) => handleChange(e)}
+            // onChange={(e:ChangeEvent<HTMLInputElement>) => handleChange(e)}
           />
         </Group>
       </form>
         <NativeSelect 
             ref={ref} 
             data={[{ value: 'NewOrder', label: '新しい順' }, { value: 'LatestOrder', label: '古い順' }]}
-            // onChange={SelectOrder}
+            onChange={SelectOrder}
             />
       <div className='mt-6'>
         {
