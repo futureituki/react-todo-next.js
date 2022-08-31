@@ -9,28 +9,27 @@ export const Search: React.FC = () => {
   const { data:tasks, status } = useQueryTasks()
   const ref = useRef<HTMLSelectElement>(null)
   if(status === 'loading') return <Loader/>
+
   const [showItems, setShowItems] = useState<Task[] | undefined>([]);
-  const [orderSortItems, setOrderSortItems] = useState<Task[] | undefined>([])
-  // useEffect(() => {
-  //   setShowItems(tasks);
-  // }, []);
+  const [orderSortItems, setOrderSortItems] = useState<Task[] | undefined>(tasks)
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const result = tasks?.filter((task) => {
       return task.title.toLowerCase().match(e.target.value.toLowerCase());
     });
     setShowItems(result);
   };
-  // const SelectOrder = () => {
-  //   if(ref.current?.value === 'NewOrder') {
-  //     setOrderSortItems([])
-  //   } 
-  //   if(ref.current?.value === 'LatestOrder') {
-  //     const latestorderItem = showItems?.sort(function(a, b){
-  //       return (a.createdAt > b.createdAt ? 1 : -1);
-  //     });
-  //     setOrderSortItems(latestorderItem)
-  //   } 
-  // }
+  const SelectOrder = () => {
+    if(ref.current?.value === 'NewOrder') {
+      setOrderSortItems([])
+    } 
+    if(ref.current?.value === 'LatestOrder') {
+      const latestorderItem = showItems?.sort(function(a, b){
+        return (a.createdAt > b.createdAt ? 1 : -1);
+      });
+      setOrderSortItems(latestorderItem)
+    } 
+  }
   return (
     <div>
       <form action='' className='flex justify-center'>
@@ -52,7 +51,7 @@ export const Search: React.FC = () => {
             data={[{ value: 'NewOrder', label: '新しい順' }, { value: 'LatestOrder', label: '古い順' }]}
             // onChange={SelectOrder}
             />
-      {/* <div className='mt-6'>
+      <div className='mt-6'>
         {
           orderSortItems !== [] ? orderSortItems?.map((item) => {
             return (
@@ -79,7 +78,7 @@ export const Search: React.FC = () => {
             </Link>
           );
         })}
-      </div> */}
+      </div>
     </div>
   );
 };
