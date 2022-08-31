@@ -11,9 +11,9 @@ export const Search: React.FC = () => {
   if(status === 'loading') return <Loader/>
   const [showItems, setShowItems] = useState<Task[] | undefined>([]);
   const [orderSortItems, setOrderSortItems] = useState<Task[] | undefined>([])
-  useEffect(() => {
-    setShowItems(tasks);
-  }, []);
+  // useEffect(() => {
+  //   setShowItems(tasks);
+  // }, []);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const result = tasks?.filter((task) => {
       return task.title.toLowerCase().match(e.target.value.toLowerCase());
@@ -52,9 +52,9 @@ export const Search: React.FC = () => {
             data={[{ value: 'NewOrder', label: '新しい順' }, { value: 'LatestOrder', label: '古い順' }]}
             // onChange={SelectOrder}
             />
-      <div className='mt-6'>
+      {/* <div className='mt-6'>
         {
-          orderSortItems == [] ? orderSortItems?.map((item, i) => {
+          orderSortItems !== [] ? orderSortItems?.map((item) => {
             return (
               <Link 
                 key={item.id} 
@@ -65,7 +65,7 @@ export const Search: React.FC = () => {
                   {item.title}
                 </a>
               </Link>
-            );
+            )
           }) : showItems?.map((item) => {
           return (
             <Link 
@@ -79,7 +79,7 @@ export const Search: React.FC = () => {
             </Link>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };
