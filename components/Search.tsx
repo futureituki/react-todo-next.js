@@ -55,7 +55,7 @@ export const Search: React.FC = () => {
             />
       <div className='mt-6'>
         {
-          orderSortItems !== [] ? orderSortItems?.map((item, i) => {
+          showItems ? showItems?.map((item, i) => {
             return (
               <Link 
                 key={item.id} 
@@ -67,7 +67,7 @@ export const Search: React.FC = () => {
                 </a>
               </Link>
             );
-          }) : showItems?.map((item) => {
+          }) : orderSortItems?.map((item) => {
           return (
             <Link 
               key={item.id} 
