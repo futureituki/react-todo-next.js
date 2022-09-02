@@ -4,5 +4,5 @@ import { Loader } from "@mantine/core";
 export const UserInfo = () => {
   const { data: user, status} = useQueryUser()
   if(status === 'loading') return <Loader/>
-  return <p className="text-white">{user?.email}</p>
+  return <p className="text-inherit">{user?.email}</p>
 }

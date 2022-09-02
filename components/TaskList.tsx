@@ -11,9 +11,9 @@ export const TaskList = () => {
   const { changeTodoDone } = useMutateTask()
   if (status === 'loading') return <Loader my="lg" color="cyan" />
   const month = String(new Date().getMonth()).length !== 2 ? '0' + String(new Date().getMonth() + 1) : String(new Date().getMonth() + 1)
-  const today = String(new Date().getFullYear()) + '-' + month + '-' + String(new Date().getDate())
+  const today = String(new Date().getFullYear()) + '-' + month + '-' + + '0' + String(new Date().getDate())
   const todayTask = tasks?.filter((task) => String(task.createdAt).slice(0,10) === today && task.done !== true)
-  console.log(todayTask)
+  console.log(today)
   const handleChangeTodo = (task:Task) => {
     changeTodoDone.mutate(task)
   }

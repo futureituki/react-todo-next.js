@@ -5,22 +5,24 @@ import Link from "next/link";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useQueryTasks } from "../hooks/useQueryTasks";
 
-export const Search = () => {
+export const Search: React.FC = () => {
   const { data:tasks, status } = useQueryTasks()
+  const [showItems, setShowItems] = useState<Task[] | undefined>(tasks);
+  const [orderSortItems, setOrderSortItems] = useState<Task[] | undefined>([])
   const ref = useRef<HTMLSelectElement>(null)
-  if(status === 'loading') return <Loader/>
-
-  const [showItems, setShowItems] = useState<Task[] | undefined>([]);
-  const [orderSortItems, setOrderSortItems] = useState<Task[] | undefined>(tasks)
-
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const result = tasks?.filter((task) => {
       return task.title.toLowerCase().match(e.target.value.toLowerCase());
     });
+    console.log(result);
     setShowItems(result);
   };
   const SelectOrder = () => {
     if(ref.current?.value === 'NewOrder') {
+      showItems?.sort(function(a, b){
+        return (a.createdAt > b.createdAt ? -1 : 1);
+      });
       setOrderSortItems([])
     } 
     if(ref.current?.value === 'LatestOrder') {
@@ -53,7 +55,7 @@ export const Search = () => {
             />
       <div className='mt-6'>
         {
-          orderSortItems !== [] ? orderSortItems?.map((item) => {
+          orderSortItems == [] ? orderSortItems?.map((item, i) => {
             return (
               <Link 
                 key={item.id} 
@@ -64,7 +66,7 @@ export const Search = () => {
                   {item.title}
                 </a>
               </Link>
-            )
+            );
           }) : showItems?.map((item) => {
           return (
             <Link 
