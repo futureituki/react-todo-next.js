@@ -23,9 +23,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const getCsrfToken = async() => {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/csrf`
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/csrf`, {withCredentials:true}
       )
-      axios.defaults.headers.common['csrf-token'] = data.csrfToken
+      axios.defaults.headers.common['csrf-token'] = data.csrfToken;
+      axios.defaults.withCredentials = true;
     }
     getCsrfToken()
   },[])
