@@ -1,4 +1,4 @@
-import { Group, Text } from '@mantine/core'
+import { Group, Loader, Text, Tooltip } from '@mantine/core'
 import React from 'react'
 import { useQueryTasks } from '../hooks/useQueryTasks'
 import { IconArrowBack } from '@tabler/icons'
@@ -6,8 +6,9 @@ import { useMutateTask } from '../hooks/useMutateTask'
 import { Task } from '@prisma/client'
 
 export const DoneList = () => {
-  const { data:tasks, status } = useQueryTasks() 
   const { changeTodoDone } = useMutateTask()
+  const { data:tasks, status } = useQueryTasks() 
+  if(status === 'loading') return <Loader/>
   const doneTask = tasks?.filter((task) => task.done !== false)
   console.log(doneTask)
   const handleChangeTodo = (task:Task) => {
@@ -23,10 +24,12 @@ export const DoneList = () => {
         </Text>
       {doneTask?.map((task) => (
         <Group key={task.id}>
-          <IconArrowBack 
-            className="h-5 w-5 cursor-pointer text-blue-500"
-            onClick={() => handleChangeTodo(task)}
-            />
+          <Tooltip label="today todo">
+            <IconArrowBack 
+              className="h-5 w-5 cursor-pointer text-blue-500"
+              onClick={() => handleChangeTodo(task)}
+              />
+          </Tooltip>
           <p>{task.title}</p>
         </Group>
       ))}

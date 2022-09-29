@@ -1,5 +1,5 @@
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
-import { Button, Group, Modal } from '@mantine/core'
+import { Button, Group, Modal, Tooltip } from '@mantine/core'
 import { Task } from '@prisma/client'
 import { useRouter } from 'next/router'
 import React, { FC, useState } from 'react'
@@ -48,14 +48,18 @@ export const TaskButton:FC<Omit<Task, 'createdAt' | 'updatedAt' | 'userId' | 'do
           </Button>
         </Group>
       </Modal>
-        <PencilAltIcon
-        className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
-        onClick={handleUpdate}
-        />
-        <TrashIcon
-          className="h-5 w-5 cursor-pointer text-blue-500"
-          onClick={() => setOpened(!opened)}
-        />
+        <Tooltip label="update todo">
+          <PencilAltIcon
+          className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
+          onClick={handleUpdate}
+          />
+        </Tooltip>
+        <Tooltip label="delete todo">
+          <TrashIcon
+            className="h-5 w-5 cursor-pointer text-blue-500"
+            onClick={() => setOpened(!opened)}
+          />
+        </Tooltip>
     </div>
   )
 }

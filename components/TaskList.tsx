@@ -1,5 +1,5 @@
 import { useQueryTasks } from '../hooks/useQueryTasks'
-import { List, ThemeIcon, Loader, Text, Group } from '@mantine/core'
+import { List, ThemeIcon, Loader, Text, Group, Tooltip } from '@mantine/core'
 import { IconCircleDashed } from '@tabler/icons'
 import { TaskItem } from './TaskItem'
 import { StarIcon } from '@heroicons/react/solid'
@@ -37,10 +37,12 @@ export const TaskList = () => {
         </Text>
       {todayTask?.map((task) => (
         <Group key={task.id}>
-          <StarIcon
-          className="h-5 w-5 cursor-pointer text-white-500 hover:text-blue-500"
-          onClick={() => handleChangeTodo(task)}
-        />
+          <Tooltip label="done todo">
+            <StarIcon
+            className="h-5 w-5 cursor-pointer text-white-500 hover:text-blue-500"
+            onClick={() => handleChangeTodo(task)}
+          />
+          </Tooltip>
           <TaskItem
             key={task.id}
             id={task.id}

@@ -19,12 +19,17 @@ export const TaskAddForm = () => {
 //       description: task.description
 //     }
 // })
-  const handleSubmit = async(e:FormEvent<HTMLFormElement>) => {
+const handleSubmit = async(e:FormEvent<HTMLFormElement>) => {
       e.preventDefault()
+      const dt = new Date;
+      const isoStr = dt.toISOString() as unknown as Date;
+      console.log(isoStr)
         createTaskMutation.mutate({
         title:title,
         description: description,
+        createdAt: isoStr
       })
+      router.push('/dashboard')
       // const algoliaIndex = client.initIndex("Todo");
       // await algoliaIndex.saveObjects(taskList as any);
   }
@@ -49,7 +54,7 @@ export const TaskAddForm = () => {
             leftIcon={<IconDatabase size={14}/>}
             color="cyan"
             type="submit"
-            onClick={() => router.push('/dashboard')}
+            // onClick={() => router.push('/dashboard')}
           >
             Create
           </Button>

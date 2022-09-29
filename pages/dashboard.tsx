@@ -5,9 +5,9 @@ import axios from "axios";
 import { LogoutIcon } from "@heroicons/react/solid";
 import { useQueryClient } from "@tanstack/react-query";
 import { Tab } from "../components/Tabs";
+import { TodayDate } from "../components/TodayDate";
 
 const Dashboard:NextPage = () => {
-  console.log(`${process.env.ALGOLIA_ADMIN_API_KEY}` )
   const router = useRouter()
   const queryClient = useQueryClient()
   const logout = async() => {
@@ -18,6 +18,7 @@ const Dashboard:NextPage = () => {
   }
   return (
     <Layout title="Task Board">
+      <TodayDate/>
       <LogoutIcon
         className="mb-6 h-6 w-6 cursor-pointer text-blue-500"
         onClick={logout}/>
