@@ -43,7 +43,7 @@ export const Calendar = () => {
       setDate(date)
     }
   }
-  const handleSubmit = (e:HTMLFormElement) => {
+  const handleSubmit = (e:any) => {
         e.preventDefault()
         createTaskMutation.mutate({
         title:title,
